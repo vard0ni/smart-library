@@ -1,0 +1,7 @@
+*.log
+/static
+__pycache__/
+/library/migrations/
+manage.py
+uwsgi.log
+/smart_library/settings.py

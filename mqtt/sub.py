@@ -25,7 +25,6 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     message = str(msg.payload).rstrip("'").lstrip("b'").split(',')
     print(message)
-
     try:
         user = User.objects.get(pk = int(message[0])) #преобразовать в кортеж
         book = Book.objects.get(pk = int(message[1]))
@@ -44,7 +43,6 @@ def on_message(client, userdata, msg):
     book.date_start.append(date.today)
     book.date_end.append(return_date_time)
     book.save()
-
 
 
 client = mqtt.Client()

@@ -1,7 +1,6 @@
 from django.db import models
 from datetime import date, datetime, timedelta
 
-# Здесь пишем наши модели. Описываем таблицы в базе данных
 
 def return_date_time():
     now = date.today()
@@ -27,7 +26,7 @@ class Book(models.Model):
 class User(models.Model):
     name = models.CharField('ФИО', max_length = 100, unique=True)
     education = models.CharField('Класс', max_length=50)
-    books = models.ManyToManyField(Book, blank=True)  #привязка книг к одному человку null=True, blank=True
+    books = models.ManyToManyField(Book, blank=True)
     position = models.CharField('Должность', default="Ученик", max_length=100)
 
     def __str__(self):

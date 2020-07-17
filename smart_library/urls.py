@@ -18,10 +18,15 @@ from django.urls import path, include
 from library.models import User
 from library.views import *
 
+
+admin.site.site_header = "SmartLy"
+admin.site.site_title = "SmartLy"
+admin.site.index_title = "my library"
+
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+	path('admin/', admin.site.urls),
+	path('user_books/<pk>', BookDetailJSON.as_view()),
     path('user/<pk>', UserDetailJSON.as_view()),
-	 path('', home),
-	 path('books/', books),
-	 path('users/', users)
+	path('', home)
 ]

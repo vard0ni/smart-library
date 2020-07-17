@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<title>SmartLy</title>
+	<link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}">
+	<script defer src="{% static 'assets/js/script.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="container__body">
+			<p class="container__title">SmartLy - умная библиотека</p>
+			<div class="container__panel">
+				<a class="container__item" href="https://ms3.newtonbox.ru/admin/">
+					<img class="container__item__icon" src="../../static/assets/img/book1.png" alt="">
+					<p class="container__item__title">my library</p>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="button-container">
+		<button data-modal-target="#modal" class="material-icons" id="help-button">contact_support</button>
+	</div>
+
+	<div class="modal" id="modal">
+		<div class="modal__header">
+			<div class="title">HELP</div>
+			<button data-close-button class="close-button" class="close-button">&times;</button>
+		</div>
+		<div class="modal__body">
+			По всем возникшим вопросам пишите на почту: smartly.iot@yandex.ru
+		</div>
+	</div>
+	<div id="overlay"></div>
+
+
+	<div class="app">
+		<div class="app__body">
+			<p class="app__title">#1 приложение для отслеживания взятых книг из библиотеки</p>
+			<div class="app__panel">
+				<a class="app__item" href="https://play.google.com/store/apps" target="_blank">
+					<img class="app__item__icon" src="../../static/assets/img/android.svg" alt="">
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">
+		<div class="footer__body">
+			<p class="footer__title"></p>
+			<div class="footer_panel">
+				<a href="#">
+					<img src="" alt="">
+				</a>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

@@ -1,48 +1,46 @@
 import paho.mqtt.client as mqtt
 import os, django
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 
 os.environ["DJANGO_SETTINGS_MODULE"] = 'smart_library.settings'
 django.setup()
+
 from django.conf import settings
 from library.models import *
+
 
 # логирование
 #def on_log(client, userdata, level, buf):
 #    print("log: ",buf)
 
 
-# The callback for when the client receives a CONNACK response from the server.
+# канал, для связи с устройством
 def on_connect(client, userdata, flags, rc):
-    #print('Connected!')
     client.subscribe([
-        ('library/device/reader',2)
+    	('library/device/reader',2)
         #('library/device/display',2)
-        #('test',2)
     ])
 
-# The callback for when a PUBLISH message is received from the server.
+
+# получение данных с устройства
+# python -m mqtt.sub	
 def on_message(client, userdata, msg):
-    message = str(msg.payload).rstrip("'").lstrip("b'").split(',')
-    print(message)
-    try:
-        user = User.objects.get(pk = int(message[0])) #преобразовать в кортеж
-        book = Book.objects.get(pk = int(message[1]))
-    except Exception as e:
-        return e.msg
-    user.books.append(book)
-    user.save()
-    '''
-    try:  # object not found
-        user.save()
-    except Exception as e:
-        return e.msg
-    else:
-        return 'good'
-    '''
-    book.date_start.append(date.today)
-    book.date_end.append(return_date_time)
-    book.save()
+	message = str(msg.payload).rstrip("'").lstrip("b'").split(',')
+	print(message)
+	try:
+		user = User.objects.get(user_id = message[0]) 
+		book = Book.objects.get(book_id = message[1])
+		#print(user)
+		#print(book)
+	except Exception:
+		client.publish('library/device/display', "Error :(", qos=2)
+		client.publish('library/device/display', "showCardWaitScreen", qos=2)
+	else:
+		if not UserBooks(book_key=book, user_key=user).exists():
+			user_book = UserBooks(book_key=book, user_key=user, date_start = date.today(), date_end = return_date_time())
+			user_book.save()
+			client.publish('library/device/display', "Success!", qos=2)
+			client.publish('library/device/display', "showCardWaitScreen", qos=2)
 
 
 client = mqtt.Client()

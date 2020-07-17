@@ -1,21 +1,24 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
-from json_views.views import JSONListView, PaginatedJSONListView, JSONDetailView
-from library.models import User, Book
+from json_views.views import JSONDetailView, JSONListView, PaginatedJSONListView
+from library.models import *
 
-# Представление, которое отдаёт список каналов из urls.py
 
+# возврат json пользователя по url 
 class UserDetailJSON(JSONDetailView):
-	model = User
-   # def get_queryset(self):
-    #    return User.objects.get(pk=int(self.kwargs['pk']))
+	#model = User
+    def get_queryset(self):
+        return User.objects.filter(pk=int(self.kwargs['pk'])).values('id', 'name', 'position', 'education')
 
+
+# возврат json книг по url 
+class BookDetailJSON(JSONListView):
+	def get_queryset(self):
+		return User.objects.filter(pk=self.kwargs['pk']).values('book__title', 'book__author','book__date_start', 'book__date_end', 'book__id')
+	
+# рендер главной страницы приложения	
 def home(request):
-	return render(request, 'home/dashboard.html')
+	return render(request, 'home/index.html')
 
-def users(request):
-	return render(request, 'home/users.html')
 
-def books(request):
-	return render(request, 'home/books.html')

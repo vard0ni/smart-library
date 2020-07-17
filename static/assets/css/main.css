@@ -61,7 +61,7 @@ body {
 	transition: 0.75s box-shadow ease, 0.5s opacity ease;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 70px;
+	margin-top: 30px;
 	padding-bottom: 15px;
 }
 
@@ -132,7 +132,7 @@ body {
   	left: 50%;
 	transform: translate(-50%, -50%) scale(0);
 	transition: 200ms ease-in-out;
-	border: 1px solid black;
+	border: 1px solid rgb(156, 156, 156);
 	border-radius: 10px;
 	z-index: 10;
 	background-color: white;
@@ -178,7 +178,8 @@ body {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(0, 0, 0, .5);
+	background-color: rgba(99, 66, 66, 0.3);
+	filter: blur(10px);
 	pointer-events: none;
 }
   
@@ -191,20 +192,19 @@ body {
 	height: 24px;
   	min-width: 24px;
  	padding: 3px;
-  	text-align: center;
+  	text-align: right;
   	position: relative;
-	display: inline-block;
 	color: #999;
 	/* color: rgba(0, 0, 0, 0.7); */
-	font-size: 30px;	
+	font-size: 22px;	
 	opacity: 0.8;
+	margin-right: 15px;
+	
 }
 
 .button-container {
-	padding-top: 30px;
-	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
+	padding-top: 10px;
+	text-align: right;
 }
 
 #help-button:active {
@@ -215,3 +215,4 @@ body {
 .title {
 	color: #7748AD;
 }
+
